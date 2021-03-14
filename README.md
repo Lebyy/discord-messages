@@ -1,11 +1,11 @@
 <p align="center"><a href="https://nodei.co/npm/discord-messages/"><img src="https://nodei.co/npm/discord-messages.png"></a></p>
-<p align="center"><img src="https://img.shields.io/npm/v/discord-messages"> <img src="https://img.shields.io/github/repo-size/Lebyy/discord-messages"> <img src="https://img.shields.io/npm/l/discord-messages"> <img src="https://img.shields.io/github/contributors/Lebyy/discord-messages"> <img src="https://img.shields.io/github/package-json/dependency-version/Lebyy/discord-messages/mongoose"> <a href="https://discord.gg/pndumb6J3t"><img src="https://discordapp.com/api/guilds/815261972450115585/widget.png" alt="Discord server"/></a></p>
+<p align="center"><img src="https://img.shields.io/npm/v/discord-messages"> <img src="https://img.shields.io/github/repo-size/Lebyy/discord-messages"> <img src="https://img.shields.io/npm/l/discord-messages"> <img src="https://img.shields.io/github/contributors/Lebyy/discord-messages"> <img src="https://img.shields.io/github/package-json/dependency-version/Lebyy/discord-messages/mongoose"> <a href="https://discord.gg/pndumb6J3t"><img src="https://discordapp.com/api/guilds/815261972450115585/widget.png" alt="Discord server - https://discord.gg/pndumb6J3t"/></a> <a href="https://discord-messages.js.org"><img src="https://img.shields.io/badge/Documentation-Click%20here-blue" alt="Documentation - https://discord-messages.js.org"/></a></p>
 
 # Discord-Messages
 - A lightweight and easy to use messages framework for discord bots, uses MongoDB.
 - If you need help feel free to join our <a href="https://discord.gg/pndumb6J3t">discord server</a> to talk and help you with your code.
 - If you encounter any of those fell free to open an issue in our <a href="https://github.com/Lebyy/discord-messages/issues">github repository</a>.
-- TypeScript is supported!
+
 # Download & Update
 You can download it from npm:
 ```cli

@@ -1,42 +1,42 @@
 {
-  "name": "discord-messages",
-  "version": "1.0.0",
-  "description": "A lightweight and easy to use message tracking framework for discord bots, uses MongoDB.",
-  "main": "index.js",
-  "dependencies": {
-    "mongoose": "^5.12.0"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Lebyy/discord-messages.git"
-  },
-  "keywords": [
-    "discord",
-    "economy",
-    "discord.js",
-    "bot",
-    "bots",
-    "leveling",
-    "levels",
-    "discord-levels",
-    "discord-xp",
-    "xp",
-    "mongo",
-    "mongoose",
-    "mongodb",
-    "discord-economy",
-    "discord-eco",
-    "framework",
+	"name": "discord-messages",
+	"version": "1.0.0",
+	"description": "A lightweight and easy to use message tracking framework for discord bots, uses MongoDB.",
+	"main": "index.js",
+	"dependencies": {
+		"mongoose": "^5.12.0"
+	},
+	"devDependencies": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Lebyy/discord-messages.git"
+	},
+	"keywords": [
+		"discord",
+		"economy",
+		"discord.js",
+		"bot",
+		"bots",
+		"leveling",
+		"levels",
+		"discord-levels",
+		"discord-xp",
+		"xp",
+		"mongo",
+		"mongoose",
+		"mongodb",
+		"discord-economy",
+		"discord-eco",
+		"framework",
 		"discord-messages",
 		"code",
 		"npm",
 		"messages"
-  ],
-  "author": "MrAugu",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Lebyy/discord-messages/issues"
-  },
-  "homepage": "https://github.com/Lebyy/discord-messages#readme"
+	],
+	"author": "Lebyy",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Lebyy/discord-messages/issues"
+	},
+	"homepage": "https://github.com/Lebyy/discord-messages#readme"
 }

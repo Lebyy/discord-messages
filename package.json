@@ -1,6 +1,6 @@
 {
 	"name": "discord-messages",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A lightweight and easy to use message tracking framework for discord bots, uses MongoDB.",
 	"main": "index.js",
 	"dependencies": {
@@ -11,9 +11,6 @@
 		"type": "git",
 		"url": "git+https://github.com/Lebyy/discord-messages.git"
 	},
-	"publishConfig": {
-  "registry":"https://npm.pkg.github.com/Lebyy"
-  },
 	"keywords": [
 		"discord",
 		"economy",

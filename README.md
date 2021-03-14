@@ -5,6 +5,7 @@
 - A lightweight and easy to use messages framework for discord bots, uses MongoDB.
 - If you need help feel free to join our <a href="https://discord.gg/pndumb6J3t">discord server</a> to talk and help you with your code.
 - If you encounter any of those fell free to open an issue in our <a href="https://github.com/Lebyy/discord-messages/issues">github repository</a>.
+- TypeScript supported!
 
 # Download & Update
 You can download it from npm:
@@ -19,7 +20,7 @@ npm update discord-messages
 # Setting Up
 First things first, we include the module into the project.
 ```js
-const Messages = require("discord-xp");
+const Messages = require("discord-messages");
 ```
 After that, you need to provide a valid mongo database url, and set it. You can do so by:
 ```js

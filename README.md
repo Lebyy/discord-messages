@@ -5,7 +5,7 @@
 - A lightweight and easy to use messages framework for discord bots, uses MongoDB.
 - If you need help feel free to join our <a href="https://discord.gg/pndumb6J3t">discord server</a> to talk and help you with your code.
 - If you encounter any of those fell free to open an issue in our <a href="https://github.com/Lebyy/discord-messages/issues">github repository</a>.
-
+- TypeScript is supported!
 # Download & Update
 You can download it from npm:
 ```cli

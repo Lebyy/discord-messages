@@ -9,7 +9,7 @@
 	"devDependencies": {},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Lebyy/discord-messages.git"
+		"url": "https://github.com/Lebyy/discord-messages"
 	},
 	"publishConfig": {
   "registry":"https://npm.pkg.github.com/lebyy_dev"

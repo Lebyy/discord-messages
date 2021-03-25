@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/nav.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/skyceil.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h4><a href="index.html">Home</a></h4><h5 class="no-bottom must-underline">Classes</h5><ul><li><span class="small-icon C">C</span><b><a href="DiscordMessages.html">DiscordMessages</a></b><ul class="has-class-methods"><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.appendMessage">appendMessage</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.computeLeaderboard">computeLeaderboard</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.createUser">createUser</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.deleteUser">deleteUser</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.fetch">fetch</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.fetchLeaderboard">fetchLeaderboard</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.resetGuild">resetGuild</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.setMessages">setMessages</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.setURL">setURL</a></li><li><span class="small-icon F">F</span><a href="DiscordMessages.html#.subtractMessages">subtractMessages</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    <div class="burger">
+        <div class="burger-line-1"></div>
+        <div class="burger-line-2"></div>
+        <div class="burger-line-3"></div>
+    </div>
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>discord-messages 1.0.2</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><p align="center"><a href="https://nodei.co/npm/discord-messages/"><img src="https://nodei.co/npm/discord-messages.png"></a></p>
+<p align="center"><img src="https://img.shields.io/npm/v/discord-messages"> <img src="https://img.shields.io/github/repo-size/Lebyy/discord-messages"> <img src="https://img.shields.io/npm/l/discord-messages"> <img src="https://img.shields.io/github/contributors/Lebyy/discord-messages"> <img src="https://img.shields.io/github/package-json/dependency-version/Lebyy/discord-messages/mongoose"> <a href="https://discord.gg/pndumb6J3t"><img src="https://discordapp.com/api/guilds/815261972450115585/widget.png" alt="Discord server - https://discord.gg/pndumb6J3t"/></a> <a href="https://discord-messages.js.org"><img src="https://img.shields.io/badge/Documentation-Click%20here-blue" alt="Documentation - https://discord-messages.js.org"/></a></p>
+<h1>Discord-Messages</h1>
+<ul>
+<li>A lightweight and easy to use messages framework for discord bots, uses MongoDB.</li>
+<li>If you need help feel free to join our <a href="https://discord.gg/pndumb6J3t">discord server</a> to talk and help you with your code.</li>
+<li>If you encounter any of those fell free to open an issue in our <a href="https://github.com/Lebyy/discord-messages/issues">github repository</a>.</li>
+<li>TypeScript supported!</li>
+</ul>
+<h1>Download &amp; Update</h1>
+<p>You can download it from npm:</p>
+<pre class="prettyprint source lang-cli"><code>npm i discord-messages
+</code></pre>
+<p>You can update to a newer version to receive updates using npm.</p>
+<pre class="prettyprint source lang-cli"><code>npm update discord-messages
+</code></pre>
+<h1>Setting Up</h1>
+<p>First things first, we include the module into the project.</p>
+<pre class="prettyprint source lang-js"><code>const Messages = require(&quot;discord-messages&quot;);
+</code></pre>
+<p>After that, you need to provide a valid mongo database url, and set it. You can do so by:</p>
+<pre class="prettyprint source lang-js"><code>Messages.setURL(&quot;mongodb://...&quot;); // You only need to do this ONCE per process.
+</code></pre>
+<h1>Examples</h1>
+<p><em>Examples assume that you have setted up the module as presented in 'Setting Up' section.</em>
+<em>Following examples assume that your <code>Discord.Client</code> is called <code>client</code>.</em></p>
+<p><em>Following examples assume that your <code>client.on(&quot;message&quot;, message</code> is called <code>message</code>.</em></p>
+<p><em>Following example contains isolated code which you need to integrate in your own command handler.</em></p>
+<p><em>Following example assumes that you are able to write asynchronous code (use <code>await</code>).</em></p>
+<ul>
+<li><strong>Adding a message to user's database for each Message sent</strong></li>
+</ul>
+<pre class="prettyprint source lang-js"><code>client.on(&quot;message&quot;, async (message) => {
+  if (!message.guild) return;
+  if (message.author.bot) return;
+
+  const AddMessage = await Messages.appendMessage(message.author.id, message.guild.id, 1);
+});
+</code></pre>
+<ul>
+<li><strong>Rank Command</strong></li>
+</ul>
+<pre class="prettyprint source lang-js"><code>const target = message.mentions.users.first() || message.author; // Grab the target.
+
+const user = await Messages.fetch(target.id, message.guild.id); // Selects the target from the database.
+
+if (!user) return message.channel.send(&quot;Seems like this user does not any messages so far...&quot;); // If there isnt such user in the database, we send a message in general.
+
+message.channel.send(`> **${target.tag}** currently has ${user.data.messages} message(s).`); // We show the message(s) count.
+</code></pre>
+<ul>
+<li><strong>Leaderboard Command</strong></li>
+</ul>
+<pre class="prettyprint source lang-js"><code>const rawLeaderboard = await Messages.fetchLeaderboard(message.guild.id, 10); // We grab top 10 users with most message(s) in the current server.
+
+if (rawLeaderboard.length &lt; 1) return reply(&quot;Nobody's in leaderboard yet.&quot;);
+
+const leaderboard = await Messages.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
+
+const lb = leaderboard.map(e => `${e.position}. ${e.username}#${e.discriminator}\nMessages Count: ${e.messages}`); // We map the outputs.
+
+message.channel.send(`**Leaderboard**:\n\n${lb.join(&quot;\n\n&quot;)}`);
+</code></pre>
+<p><em>Is time for you to get creative..</em></p>
+<h1>Methods</h1>
+<p><strong>createUser</strong></p>
+<p>Creates an entry in database for that user if it doesnt exist.</p>
+<pre class="prettyprint source lang-js"><code>Messages.createUser(&lt;UserID - String>, &lt;GuildID - String>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Object>
+</code></pre>
+<p><strong>deleteUser</strong></p>
+<p>If the entry exists, it deletes it from database.</p>
+<pre class="prettyprint source lang-js"><code>Messages.deleteUser(&lt;UserID - String>, &lt;GuildID - String>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Object>
+</code></pre>
+<p><strong>appendMessage</strong></p>
+<p>It adds a specified amount of messages to the current amount of messages for that user, in that guild. It creates a new user with that amount of messages, if there is no entry for that user.</p>
+<pre class="prettyprint source lang-js"><code>Messages.appendMessage(&lt;UserID - String>, &lt;GuildID - String>, &lt;Amount - Integer>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Boolean>
+</code></pre>
+<p><strong>setMessage</strong></p>
+<p>It sets the messages to a specified amount and re-calculates the level.</p>
+<pre class="prettyprint source lang-js"><code>Messages.setMessages(&lt;UserID - String>, &lt;GuildID - String>, &lt;Amount - Integer>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Boolean/Object>
+</code></pre>
+<p><strong>fetch</strong></p>
+<p>Retrives selected entry from the database, if it exists.</p>
+<pre class="prettyprint source lang-js"><code>Messages.fetch(&lt;UserID - String>, &lt;GuildID - String>, &lt;FetchPosition - Boolean>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Object>
+</code></pre>
+<p><strong>subtractMessages</strong></p>
+<p>It removes a specified amount of messages to the current amount of messages for that user, in that guild.</p>
+<pre class="prettyprint source lang-js"><code>Messages.subtractMessages(&lt;UserID - String>, &lt;GuildID - String>, &lt;Amount - Integer>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Boolean/Object>
+</code></pre>
+<p><strong>resetGuild</strong></p>
+<p>It deletes the entire guild's data.</p>
+<pre class="prettyprint source lang-js"><code>Messages.resetGuild(&lt;GuildID - String>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Boolean/Object>
+</code></pre>
+<p><strong>fetchLeaderboard</strong></p>
+<p>It gets a specified amount of entries from the database, ordered from higgest to lowest within the specified limit of entries.</p>
+<pre class="prettyprint source lang-js"><code>Messages.fetchLeaderboard(&lt;GuildID - String>, &lt;Limit - Integer>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Array [Objects]>
+</code></pre>
+<p><strong>computeLeaderboard</strong></p>
+<p>It returns a new array of object that include messages, guild id, user id, leaderboard position, username and discriminator.</p>
+<pre class="prettyprint source lang-js"><code>Messages.computeLeaderboard(&lt;Client - Discord.js Client>, &lt;Leaderboard - fetchLeaderboard output>, &lt;fetchUsers - boolean, disabled by default>);
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+<pre class="prettyprint source"><code>Promise&lt;Array [Objects]>
+</code></pre>
+<h1>Enjoying Discord-Messages?</h1>
+<p>Consider donating: https://www.buymeacoffee.com/lebyydev
+Thanks 😊</p>
+<h1>Credits</h1>
+<ul>
+<li><a href="https://github.com/MrAugu/discord-xp">Discord-XP</a> Discord-Messages wouldn't exist without them! Consider to check out Discord-XP package aswell and star the repo!</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> using <a href="https://github.com/zyrouge/jsdoc-skyceil">Skyceil Theme</a>
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+
+</body>
+</html>

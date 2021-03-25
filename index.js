@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Messages = require("./models/messages.js");
-var mongoUrl;
+let mongoUrl;
 
 /**
  *
@@ -13,12 +13,13 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [dbUrl] - A valid mongo database URI.
+   * @param {string} dbUrl - A valid mongo database URI.
    * @return {Promise} - The mongoose connection promise.
    * @memberof DiscordMessages
    */
   static async setURL(dbUrl) {
     if (!dbUrl) throw new TypeError("A database url was not provided.");
+		if(mongoUrl) throw new TypeError("A database url was already configured.");
     mongoUrl = dbUrl;
     return mongoose.connect(dbUrl, {
       useNewUrlParser: true,
@@ -31,9 +32,9 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [userId] - Discord user id.
-   * @param {string} [guildId] - Discord guild id.
-   * @return {objcet} - The user data object.
+   * @param {string} userId - Discord user id.
+   * @param {string} guildId - Discord guild id.
+   * @return {object} - The user data object.
    * @memberof DiscordMessages
    */
   static async createUser(userId, guildId) {
@@ -57,9 +58,9 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [userId] - Discord user id.
-   * @param {string} [guildId] - Discord guild id.
-   * @return {objcet} - The user data object.
+   * @param {string} userId - Discord user id.
+   * @param {string} guildId - Discord guild id.
+   * @return {object} - The user data object.
    * @memberof DiscordMessages
    */
   static async deleteUser(userId, guildId) {
@@ -78,10 +79,10 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [userId] - Discord user id.
-   * @param {string} [guildId] - Discord guild id.
-   * @param {number} [messages] - Amount of messages to append.
-   * @return {objcet} - The user data object. 
+   * @param {string} userId - Discord user id.
+   * @param {string} guildId - Discord guild id.
+   * @param {number} messages - Amount of messages to append.
+   * @return {object} - The user data object. 
    * @memberof DiscordMessages
    */
   static async appendMessage(userId, guildId, messages) {
@@ -113,10 +114,10 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [userId] - Discord user id.
-   * @param {string} [guildId] - Discord guild id.
-   * @param {number} [messages] - Amount of messages to set.
-   * @return {objcet} - The user data object.
+   * @param {string} userId - Discord user id.
+   * @param {string} guildId - Discord guild id.
+   * @param {number} messages - Amount of messages to set.
+   * @return {object} - The user data object.
    * @memberof DiscordMessages
    */
   static async setMessages(userId, guildId, messages) {
@@ -138,10 +139,10 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [userId] - Discord user id.
-   * @param {string} [guildId] - Discord guild id.
+   * @param {string} userId - Discord user id.
+   * @param {string} guildId - Discord guild id.
 	 * @param {boolean} [fetchPosition=false] - Wheter to fetch the users position.
-   * @return {objcet} - The user data object.
+   * @return {object} - The user data object.
    * @memberof DiscordMessages
    */
   static async fetch(userId, guildId, fetchPosition = false) {
@@ -167,10 +168,10 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [userId] - Discord user id.
-   * @param {string} [guildId] - Discord guild id.
-   * @param {number} [messages] - Amount of messages to subtract.
-   * @return {objcet} - The user data object.
+   * @param {string} userId - Discord user id.
+   * @param {string} guildId - Discord guild id.
+   * @param {number} messages - Amount of messages to subtract.
+   * @return {object} - The user data object.
    * @memberof DiscordMessages
    */
   static async subtractMessages(userId, guildId, messages) {
@@ -188,12 +189,33 @@ class DiscordMessages {
     return user;
   }
 
+	/**
+   *
+   *
+   * @static
+   * @param {string} guildId - Discord guild id.
+   * @return {boolean} - Return's true if success.
+   * @memberof DiscordMessages
+   */
+  static async resetGuild(guildId) {
+    if (!guildId) throw new TypeError("A guild id was not provided.");
+
+    const user = await Messages.findOne({ guildID: guildId });
+    if (!user) return false;
+
+    await Messages.findOneAndDelete({
+			guildID: guildId
+		}).catch(e => console.log(`Failed to reset guild: ${e}`));
+
+		return true;
+  }
+
   /**
    *
    *
    * @static
-   * @param {string} [guildId] - Discord guild id.
-   * @param {number} [limit] - Amount of maximum enteries to return.
+   * @param {string} guildId - Discord guild id.
+   * @param {number} limit - Amount of maximum enteries to return.
    * @return {Array} - The leaderboard array.
    * @memberof DiscordMessages
    */
@@ -210,8 +232,8 @@ class DiscordMessages {
    *
    *
    * @static
-   * @param {string} [client] - Your Discord.CLient.
-   * @param {array} [leaderboard] - The output from 'fetchLeaderboard' function.
+   * @param {string} client - Your Discord.CLient.
+   * @param {array} leaderboard - The output from 'fetchLeaderboard' function.
    * @param {boolean} [fetchUsers=false] - Wheter to fetch each users position.
    * @return {*} 
    * @memberof DiscordMessages

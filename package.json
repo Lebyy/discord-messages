@@ -1,6 +1,9 @@
 {
 	"name": "discord-messages",
-	"version": "1.0.1",
+	"scripts": {
+    "gpr": "node scripts/gpr.js"
+  },
+	"version": "1.0.2",
 	"description": "A lightweight and easy to use message tracking framework for discord bots, uses MongoDB.",
 	"main": "index.js",
 	"dependencies": {

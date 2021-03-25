@@ -130,7 +130,17 @@ Promise<Object>
 
 It removes a specified amount of messages to the current amount of messages for that user, in that guild.
 ```js
-Messages.subtractXp(<UserID - String>, <GuildID - String>, <Amount - Integer>);
+Messages.subtractMessages(<UserID - String>, <GuildID - String>, <Amount - Integer>);
+```
+- Output:
+```
+Promise<Boolean/Object>
+```
+**resetGuild**
+
+It deletes the entire guild's data.
+```js
+Messages.resetGuild(<GuildID - String>);
 ```
 - Output:
 ```

@@ -1,7 +1,8 @@
-node_modules
 package-lock.json
 test.js
+node_modules/
+.github/
 docs/
-.npmrc
-.replit
-scripts/
+configs.json
+users.json
+
